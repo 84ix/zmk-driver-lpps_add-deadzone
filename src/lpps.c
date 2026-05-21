@@ -162,6 +162,10 @@ static void lpps_motion_work_handler(struct k_work *work) {
     // close i2c bus of module
     ret = lpps_i2c_read_reg(dev, 0, transfer_bytes, 1);
 
+#if IS_ENABLED(CONFIG_LPPS_SENSOR_LOG)
+    LOG_INF("LPPS_SENSOR t=%lld x=%d y=%d z=%d", current_time, x, y, z);
+#endif
+
     LOG_DBG("Movement: x=%4d y=%4d z=%4d", x, y, z);
     input_report_rel(dev, INPUT_REL_X, x, false, K_FOREVER);
     input_report_rel(dev, INPUT_REL_Y, y, true, K_FOREVER);

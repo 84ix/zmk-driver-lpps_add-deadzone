@@ -3,3 +3,14 @@ menuconfig LPPS
   select I2C
     help
       Enable LPPS
+
+if LPPS
+
+config LPPS_SENSOR_LOG
+    bool "Log raw LPPS sensor samples"
+    default n
+    help
+      Emit one INFO log line for each LPPS motion sample, using a stable
+      LPPS_SENSOR prefix for drift investigation.
+
+endif # LPPS
